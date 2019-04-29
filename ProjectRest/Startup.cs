@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using ProjectRest.Models;
 
 namespace ProjectRest
 {
@@ -22,6 +24,9 @@ namespace ProjectRest
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddDbContext<ProjectRestContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ProjectRestContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
